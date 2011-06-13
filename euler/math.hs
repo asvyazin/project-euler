@@ -1,5 +1,7 @@
 module Euler.Math where
 
+import Data.List
+
 divideBy n x = (x `mod` n) == 0
 
 numberToDigits n base =
@@ -20,3 +22,22 @@ isNumberPalindrome n base =
       l == (reverse l)
       
 isNumberPalindrome10 = (`isNumberPalindrome` 10)
+
+square n = n * n
+
+isPrime n
+  | n == 2 = True
+  | n == 3 = True
+  | even n = False
+  | otherwise =
+    all (\p -> not $ divideBy p n) testingSlice
+    where
+      testingNumbers = iterate (+ 2) 3
+      testingSlice = takeWhile (\p -> square p <= n) testingNumbers
+      
+nextPrime n =
+  let Just m = find isPrime [n + 1..]
+  in m
+     
+allPrimes =
+  iterate nextPrime 2
