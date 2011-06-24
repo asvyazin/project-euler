@@ -4,7 +4,7 @@ import Data.List
 
 divideBy n x = (x `mod` n) == 0
 
-numberToDigits n base =
+numberToDigits base n =
   reverse $ numberToDigitsRev n base
   where
     numberToDigitsRev 0 _ = []
@@ -13,15 +13,20 @@ numberToDigits n base =
       where
         (p, q) = divMod n base
         
-numberToDigits10 = (`numberToDigits` 10)
+numberToDigits10 = numberToDigits 10
 
-isNumberPalindrome n base =
-  isListPalindrome $ numberToDigits n base
+digitsToNumber base l =
+  foldl1 (\n -> \d-> base * n + d) l
+  
+digitsToNumber10 = digitsToNumber 10
+
+isNumberPalindrome base n =
+  isListPalindrome $ numberToDigits base n
   where
     isListPalindrome l = 
       l == (reverse l)
       
-isNumberPalindrome10 = (`isNumberPalindrome` 10)
+isNumberPalindrome10 = isNumberPalindrome 10
 
 square n = n * n
 
