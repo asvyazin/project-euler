@@ -13,14 +13,15 @@ maxSlice =
   safeMax . map multAll . slices
   where multAll = foldl1 (*)
         
-isEmpty [] = True
-isEmpty _ = False
-
-listify x = [x]
-
+listify = map (\x -> [x])
+        
+myZip [] l = l
+myZip l [] = listify l
+myZip (x:xs) (y:ys) = (x:y):(myZip xs ys)
+        
 halfTranspose [] = [[]]
 halfTranspose (l:ls) =
-  [x]:(transpose [xs, halfTranspose ls])
+  [x]:(myZip xs $ halfTranspose ls)
   where (x:xs) = l
 
 main = do
@@ -32,6 +33,10 @@ main = do
     table' = transpose table
     m1 = tableToMax table
     m2 = tableToMax table'
-    m = maximum [m1, m2]
+    table_= halfTranspose table
+    table'_= halfTranspose table'
+    m3 = tableToMax table_
+    m4 = tableToMax table'_
+    m = maximum [m1, m2, m3, m4]
     in
    putStrLn $ show m
