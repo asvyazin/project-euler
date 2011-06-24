@@ -41,3 +41,13 @@ nextPrime n =
      
 allPrimes =
   iterate nextPrime 2
+  
+divisorsUnsorted n =
+  concat $ map divisorClone divisorsSmall
+  where isSmallEnough p = (square p) <= n
+        isSqrt p = (square p) == n
+        isDivisor p = divideBy p n
+        divisorsSmall = filter isDivisor $ takeWhile isSmallEnough [1..]
+        divisorClone p
+          | isSqrt p = [p]
+          | otherwise = [p, n `div` p]
