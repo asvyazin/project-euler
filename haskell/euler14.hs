@@ -1,16 +1,9 @@
 import Data.List
 
-next p
-  | even p = p `div` 2
-  | otherwise = 3 * p + 1
-    
-collatzLength 1 = 1
-collatzLength n =
-  1 + (collatzLength $ next n)
+next n
+  | even n = n `div` 2
+  | otherwise = 3 * n + 1
 
-main =
-  let
-    comparePairs (n, m) (n', m') = compare m m'    
-    (res, len) = maximumBy comparePairs $ map (\n -> (n, collatzLength n)) [1..1000000]
-  in
-   putStrLn $ show res ++ " " ++ show len
+collatzLength = length . takeWhile (/= 1) . iterate next
+                
+main = print $ show $ maximum $ map (\n-> (collatzLength n, n)) [500001..999999]
