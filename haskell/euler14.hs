@@ -6,4 +6,4 @@ next n
 
 collatzLength = length . takeWhile (/= 1) . iterate next
                 
-main = print $ show $ maximum $ map (\n-> (collatzLength n, n)) [500001..999999]
+main = print $ maximum $ map (\n-> (collatzLength n, n)) [500001..999999]
