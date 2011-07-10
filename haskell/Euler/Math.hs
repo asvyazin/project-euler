@@ -56,3 +56,6 @@ divisorsUnsorted n =
         divisorClone p
           | isSqrt p = [p]
           | otherwise = [p, n `div` p]
+
+properDivisors n = filter (/= n) $ divisorsUnsorted n
+sumOfProperDivisors = sum . properDivisors

@@ -1,7 +1,5 @@
 import Euler.Math
 
-properDivisors n = filter (/= n) $ divisorsUnsorted n
-sumOfProperDivisors = sum . properDivisors
 isAmicable n
   | m == n = False
   | sumOfProperDivisors m == n = True 
