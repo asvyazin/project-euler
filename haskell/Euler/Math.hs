@@ -2,6 +2,10 @@ module Euler.Math where
 
 import Data.List
 
+next (x, y) = (x + y, x)
+
+fibonacci = map snd $ iterate next (1, 1)
+
 divideBy n x = (x `mod` n) == 0
 
 numberToDigits base n =
