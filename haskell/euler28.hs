@@ -1,0 +1,10 @@
+diag1 n = n * n
+diag2 n = (diag1 n) - (n - 1)
+diag3 n = (diag2 n) - (n - 1)
+diag4 n = (diag3 n) - (n - 1)
+numbers = map (\x -> 2 * x + 1) [1..500]
+sum1 = sum $ map diag1 numbers
+sum2 = sum $ map diag2 numbers
+sum3 = sum $ map diag3 numbers
+sum4 = sum $ map diag4 numbers
+main = print $ 1 + sum1 + sum2 + sum3 + sum4
