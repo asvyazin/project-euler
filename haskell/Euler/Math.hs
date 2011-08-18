@@ -35,7 +35,7 @@ isNumberPalindrome10 = isNumberPalindrome 10
 square n = n * n
 
 isPrime n
-  | n < 0 = False
+  | n <= 1 = False
   | n == 2 = True
   | n == 3 = True
   | even n = False
