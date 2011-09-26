@@ -64,3 +64,21 @@ divisorsUnsorted n =
 
 properDivisors n = filter (/= n) $ divisorsUnsorted n
 sumOfProperDivisors = sum . properDivisors
+
+primeFactors n = iter 2 n
+  where
+    iter _ 1 = []
+    iter p n
+      | divideBy p n = p:(iter p (n `div` p))
+      | otherwise = iter (p + 1) n
+distinctPrimeFactors n = iter 2 False n
+  where
+    iter _ _ 1 = []
+    iter p f n
+      | divideBy p n =
+        let factors = iter p True (n `div` p)
+        in
+         case f of
+           True -> factors
+           _ -> p:factors
+      | otherwise = iter (p + 1) False n
